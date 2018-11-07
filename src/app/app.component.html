@@ -1,21 +1,63 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<app-header></app-header>
 
-<router-outlet></router-outlet>
+<div class="example-container mat-elevation-z8">
+	<div class="example-header">
+		<mat-form-field>
+			<input matInput #filter (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+			<button mat-icon-button matSuffix aria-label="clear" *ngIf="filter.value" (click)="filter.value=''; applyFilter('');">
+				<mat-icon>close</mat-icon>
+			</button>
+		</mat-form-field>
+	</div>
+
+	<mat-table #table [dataSource]="dataSource">
+
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef>Nome Completo do Formando</mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Name" [value]="element.name" [(ngModel)]="element.name">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="formador">
+			<mat-header-cell *matHeaderCellDef>Formador</mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Formador" [value]="element.formador" [(ngModel)]="element.formador">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="conteudo">
+			<mat-header-cell *matHeaderCellDef>Conteúdo da Formação</mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Conteudo" [value]="element.conteudo" [(ngModel)]="element.conteudo">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="data">
+			<mat-header-cell *matHeaderCellDef>Data</mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Data" [value]="element.data" [(ngModel)]="element.data">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<ng-container matColumnDef="horas">
+			<mat-header-cell *matHeaderCellDef>Horas Lecionadas</mat-header-cell>
+			<mat-cell *matCellDef="let element">
+				<mat-form-field floatLabel="never">
+					<input matInput placeholder="Horas" [value]="element.horas" [(ngModel)]="element.horas">
+				</mat-form-field>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+	</mat-table>
+</div>
